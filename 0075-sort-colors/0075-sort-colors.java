@@ -1,35 +1,34 @@
+
 class Solution {
     public void sortColors(int[] nums) {
 
-        for (int i = 0; i < nums.length; i++) {
-            int idx = getIndexAboutMinValue(nums, i+1);
-            
-            if (idx == -1){
-                continue;
+        int left = 0;
+        int right = nums.length-1;
+        int idx = 0;
+        while (idx <= right){
+
+            if (nums[idx]==0){
+                swap(nums,idx,left);
+
+                left+=1;
+                idx+=1;
+            } else if (nums[idx]==2) {
+                swap(nums,idx,right);
+
+                right-=1;
             }
-
-            int first = nums[i];
-            int second = nums[idx];
-
-            if (first > second){
-                nums[i]= second;
-                nums[idx]= first;
+            else{
+                idx+=1;
             }
-
         }
     }
 
-    public int getIndexAboutMinValue(int[] nums, int from){
-        int minValue = Integer.MAX_VALUE;
-        int idx = -1;
+    public void swap(int[] nums, int first, int second){
+        int value1 = nums[first];
+        int value2 = nums[second];
 
-        for (int i = from; i < nums.length; i++) {
-            if (minValue >= nums[i]){
-                minValue=nums[i];
-                idx=i;
-            }
-        }
-
-        return idx;
+        nums[first] = value2;
+        nums[second]= value1;
+        
     }
 }
